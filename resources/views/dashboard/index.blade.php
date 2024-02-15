@@ -16,15 +16,15 @@
         </div>
         <div class="card" style="width: 250px;">
           <h3>Pemeriksaan</h3>
-          <button>Get Started</button>
+          <button>3</button>
         </div>
         <div class="card" style="width: 250px;">
           <h3>User</h3>
-          <button>Get Started</button>
+          <button>2</button>
         </div>
         <div class="card" style="width: 250px;">
           <h3>Log</h3>
-          <button>Get Started</button>
+          <button>5</button>
         </div>
       </div>
       

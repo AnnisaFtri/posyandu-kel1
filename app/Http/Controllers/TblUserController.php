@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Profile;
 use App\Models\tbl_user;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,7 @@ class TblUserController extends Controller
      */
     public function index()
     {
-        //
+        $profile = Profile
     }
 
     /**

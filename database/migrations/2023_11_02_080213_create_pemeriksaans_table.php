@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string('nama_anak',50);
             $table->char('id_anak', 20)->nullable(false);
             $table->date('tanggal_pemeriksaan')->nullable(false);
-            $table->integer('usia')->nullable(false);
-            $table->integer('berat_badan', false)->nullable(false);
-            $table->integer('tinggi_badan', false)->nullable(false);
+            $table->string('usia')->nullable(false);
+            $table->string('berat_badan', false)->nullable(false);
+            $table->string('tinggi_badan', false)->nullable(false);
             $table->integer('lingkar_kepala', false)->nullable(false);
             $table->string('status_gizi',50)->nullable(false);
             $table->string('saran',50)->nullable(false);

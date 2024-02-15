@@ -13,7 +13,6 @@
 		
                     <a href="#addEmployeeModal" class="btn btn-success" style="width: 150px;" data-toggle="modal"><i
                             class="material-icons">&#xE147;</i> <span>Tambah</span></a> <br>
-                    
                 </div>
             </div>
         </div>
@@ -33,7 +32,7 @@
                     <td>{{ $index + 1 }}</td>
                     <td>{{ $p->id_pemeriksaan }}</td>
                     <td>{{ $p->nama_anak }}</td>
-                    <td>{{ $p->tanggal_penimbangan }}</td>
+                    <td>{{ $p->tanggal_pemeriksaan }}</td>
 					<td style="width: 150px; padding: 0px;display : flex">
 					<a href="#editEmployeeModal" class="edit btn_edit" data-toggle="modal" idPemeriksaan="{{ $p->id_pemeriksaan }}"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
 	                <a href="#deleteEmployeeModal" class="delete btn_delete" data-toggle="modal" idPemeriksaan="{{ $p->id_pemeriksaan }}"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
@@ -60,12 +59,12 @@
 				<div class="modal-body">	
                 <div class="form-group">
 						<label>ID pemeriksaan</label>
-						<input name="id_pemeriksaan" type="number" class="form-control" required>
+						<input name="id_pemeriksaan" type="text" class="form-control" required>
 					</div>
 
                 <div class="form-group">
-						<label>NIK anak</label>
-						<input name="nik_anak" type="number" class="form-control" required>
+						<label>ID anak</label>
+						<input name="id_anak" type="text" class="form-control" required>
 					</div>
 					<div class="form-group">
 						<label>Nama</label>
@@ -77,15 +76,15 @@
 					</div>
                     <div class="form-group">
 						<label>Usia</label>
-						<input name="usia" type="number" class="form-control" required>
+						<input name="usia" type="text" class="form-control" required>
 					</div>
                     <div class="form-group">
 						<label>Berat Badan</label>
-						<input name="berat_badan" type="number" class="form-control" required>
+						<input name="berat_badan" type="text" class="form-control" required>
 					</div>		
                     <div class="form-group">
 						<label>Tinggi badan</label>
-						<input name="tinggi_badan" type="number" class="form-control" required>
+						<input name="tinggi_badan" type="text" class="form-control" required>
 					</div>		
                     <div class="form-group">
 						<label>Lingkar kepala</label>
@@ -112,7 +111,7 @@
 <div id="editEmployeeModal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<form action="/dataanak/update" method="POST">
+			<form action="/pemeriksaan/update" method="POST">
 				<div class="modal-header">						
 					<h4 class="modal-title">Edit</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -124,8 +123,8 @@
 						<input name="id_pemeriksaan" type="text" class="form-control" required id="id_pemeriksaan">
 					</div>
 					<div class="form-group">
-						<label>NIK</label>
-						<input name="nik_anak" type="number" class="form-control" required id="nik_anak">
+						<label>ID Anak</label>
+						<input name="id_anak" type="number" class="form-control" required id="id_anak">
 					</div>
 					<div class="form-group">
 						<label>Nama</label>
@@ -178,9 +177,14 @@
 <div id="detailEmployeeModal" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form action="/dataanak/detail" method="GET">
+                <form action="/pemeriksaan/detail" method="GET">
                     <div class="modal-header">
                         <h4 class="modal-title">Detail</h4>
+                        <!-- <a href="pemeriksaan/cetak">
+                        <btn class="btn btn-success ml-auto">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#ffffff}</style><path d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V274.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7V32zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V416c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352H64zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/></svg>Cetak PDF
+                        </btn> -->
+                    </a>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
                     <div class="modal-body">
@@ -275,7 +279,7 @@
                     },
                     success: function(data) {
                         $('#id_pemeriksaan').val(data.id_pemeriksaan)
-                        $('#nik_anak').val(data.nik_anak)
+                        $('#id_anak').val(data.id_anak)
                         $('#nama_anak').val(data.nama_anak)
                         $('#tanggal_pemeriksaan').val(data.tanggal_pemeriksaan)
                         $('#usia').val(data.usia)

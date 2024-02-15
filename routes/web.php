@@ -56,11 +56,12 @@ Route::get('/landingpage', [landingpageController::class, 'index']);
  Route::post('/dataanak/update', [AnakController::class, 'update']);
  Route::delete('/dataanak/hapus', [AnakController::class, 'hapus']);
  Route::get('/dataanak/detail', [AnakController::class, 'detail'])->name('dataanak.detail');
+ Route::get('/dataanak/cetak', [AnakController::class, 'cetak']);
 
 // jenis pelayanan//
 Route::get('/jenispelayanan', [JenisPelayananController::class, 'index'])->name('indexjenis');
 Route::post('/jenispelayanan/tambah', [JenisPelayananController::class, 'store']);
-Route::delete('/jenispelayanan/hapus', [JenisPelayananController::class, 'hapus'])->name('jenispelayanan.hapus');
+Route::delete('/jenispelayanan/hapus', [JenisPelayananController::class, 'hapus']);
 
 //edit
 route::get('/dataanak', [AnakController::class, 'index'])->name('indexanak');
@@ -82,3 +83,4 @@ Route::post('/pemeriksaan/edit', [PemeriksaanController::class, 'edit']);
 Route::post('/pemeriksaan/update', [PemeriksaanController::class, 'update']);
 Route::get('/pemeriksaan/detail', [PemeriksaanController::class, 'detail']);
 Route::delete('/pemeriksaan/hapus', [PemeriksaanController::class, 'hapus']);
+Route::get('/pemeriksaan/cetak', [PemeriksaanController::class, 'cetak']);

@@ -12,13 +12,9 @@ class JenisPelayananController extends Controller
      */
     public function index()
     {
-        $data = [
-            'jenis_pelayanans' => jenis_pelayanan::all()
-        ];
-
-        return view('jenispelayanan.index', $data);
+        $jenis_pelayanan = jenis_pelayanan::all();
+        return view('jenispelayanan.index', compact('jenis_pelayanan'));
     }
-
     /**
      * Show the form for creating a new resource.
      */
@@ -34,18 +30,21 @@ class JenisPelayananController extends Controller
     {
         $data = $request->validate([
             'id_pelayanan' => 'required',
-            'jenis_pelayanan' => ['required', 'max:40'],
-            'tanggal_pelayanan' => 'required',
+            'jenis_pelayanan' => ['required', 'max:50'],
+            'tanggal_pelayanan' => 'required'
+            
         ]);
-
-        // dd($request->all());
-
+            //  dd($data);
         if ($data) {
            
             $dataInsert = jenis_pelayanan::create($data);
+
+            
+
             if ($dataInsert) {
-                return redirect()->to('/jenispelayanan')->with('success', 'Jenis pelayanan berhasil ditambah');
+                return redirect()->to('/jenispelayanan')->with('success', 'Jenis pemeriksaan berhasil ditambah');
             }
+            dd($dataInsert);
         }
 
         return redirect()->to('/jenispelayanan')->with('error', 'Gagal tambah data');
@@ -54,17 +53,12 @@ class JenisPelayananController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(jenis_pelayanan $jenis_pelayanan)
-    {
-        //
-    }
-
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(jenis_pelayanan $jenis_pelayanan)
+    public function edit(Request $request, jenis_pelayanan $jenis_pelayanan)
     {
-        //
+            //
     }
 
     /**
@@ -78,13 +72,10 @@ class JenisPelayananController extends Controller
     /**
      * Remove the specified resource from storage.
      */
- public function hapus(Request $request)
-{
-    $id_pelayanan = $request->input('id_pelayanan');
-
-    $jenis_pelayanan = jenis_pelayanan::findOrFail($id_pelayanan);
-    $jenis_pelayanan->delete();
-
-    return response()->json(['message' => 'Data berhasil dihapus']);
-}
+    public function hapus(Request $request, jenis_pelayanan $jenis_pelayanan)
+    {
+        $idPelayanan = $request->input('id_pelayanan');
+        $data = $jenis_pelayanan->where('id_pelayanan', $idPelayanan)->delete();
+        return response()->json($data);
+    }
 }

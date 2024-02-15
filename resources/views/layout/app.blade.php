@@ -251,7 +251,6 @@ li{
 .table-responsive {
     margin: 30px 0;
 }
-
 .table-title h2 {
 	margin: 5px 0 0;
 	font-size: 24px;

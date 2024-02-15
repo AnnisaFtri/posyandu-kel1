@@ -8,15 +8,20 @@
                 <div class="row">
                     <div class="col-10">
                         <h2>DATA <b>ANAK</b> </h2>
-                    </div>
-                    <div class="col-sm-2">
-
-                        <a href="#addEmployeeModal" class="btn btn-success" style="width: 150px;" data-toggle="modal"><i
-                                class="material-icons">&#xE147;</i> <span>Tambah</span></a> <br>
-
-                    </div>
-                </div>
-            </div>
+                   <div class="row">
+                   <div class="row">
+    <div class="col-sm-6 d-flex justify-content-center"> <!-- Menggunakan grid system Bootstrap untuk membagi kolom -->
+        <a href="#addEmployeeModal" class="btn btn-success" style="width: 150px;" data-toggle="modal">
+            <i class="material-icons">&#xE147;</i> <span>Tambah</span>
+        </a> 
+    </div>
+    <div class="col-sm-6 d-flex justify-content-center justify-content-sm-end"> <!-- Menggunakan grid system Bootstrap untuk membagi kolom -->
+        <a href="dataanak/cetak" class="btn btn-success">
+            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
+            </svg> Cetak PDF
+        </a>
+    </div>
+</div>
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
@@ -60,6 +65,7 @@
                 <form method="post" action="{{ url('dataanak', ['tambah']) }}">
                     @csrf
                     <div class="modal-header">
+
                         <h4 class="modal-title">Tambah Data Anak</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
@@ -176,7 +182,13 @@
             <div class="modal-content">
                 <form action="/dataanak/detail" method="GET">
                     <div class="modal-header">
+                        <a href="dataanak/cetak">
+                        <btn class="btn btn-success ml-auto">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#ffffff}</style><path d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V274.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7V32zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V416c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352H64zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/></svg>Cetak PDF
+                        </btn>
+                    </a>
                         <h4 class="modal-title">Detail</h4>
+
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
                     <div class="modal-body">
@@ -254,9 +266,10 @@
 
     <script>
         $(document).ready(function() {
+            // console.log('tes');
+
             $('.btn_edit').click(function() {
                 var idAnak = $(this).attr('idAnak');
-                console.log('tes')
                 $.ajax({
                     type: 'POST',
                     url: '/dataanak/edit',
@@ -305,10 +318,12 @@
             })
 
             $('.btn_delete').click(function() {
+
                 var idAnak = $(this).attr('idAnak');
                 $('#deleteEmployeeModal input[name="id_anak"]').val(idAnak);
 
                 $('.final_btn').off('click').on('click', function() {
+                    // console.log(idAnak);
                     $.ajax({
                         type: 'DELETE',
                         url: '/dataanak/hapus',

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\anak;
 use App\Models\kepala_keluarga;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\JsonResponse;
 
 class AnakController extends Controller
@@ -114,6 +115,14 @@ class AnakController extends Controller
         $data = $anak->where('id_anak', $idAnak)->first();
         return response()->json($data);
     } 
+    public function cetak()
+    {
+     $anak = Anak::all();
+ 
+     $pdf = PDF::loadview('dataanak.cetak',['anak'=>$anak]);
+     return $pdf->download('laporan-dataanak-pdf');
+    }
+}
     // public function detail(Request $request)
     // {
     //     $id =$request->id;
@@ -122,7 +131,7 @@ class AnakController extends Controller
     //     ];
     //     return view('dashboard.dataanak.detail', $data);  
     // }
-}
+
     
 /**
      * Remove the specified resource from storage.
