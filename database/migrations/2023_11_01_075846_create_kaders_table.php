@@ -13,16 +13,17 @@ return new class extends Migration
     {
         Schema::create('kaders', function (Blueprint $table) {
             $table->char('nomor_petugas', 5)->nullable(false)->primary();
-            $table->string('username',50)->nullable(false);
-            $table->string('nama_kader',50)->nullable(false);
+            $table->unsignedBigInteger('id_user');
+            $table->string('nama_kader', 50)->nullable(false);
             $table->date('tanggal_lahir_kader');
-            $table->enum('jenis_kelamin', ['laki-laki','perempuan']);
-            $table->string('alamat',150);
-            $table->integer('no_telpon_kader',);
+            $table->enum('jenis_kelamin', ['laki-laki', 'perempuan']);
+            $table->string('alamat', 150);
+            $table->string('no_telpon_kader');
             $table->string('nama_posyandu', 50);
             $table->timestamps(false);
 
-            $table->foreign('username')->on('table_users')->references('username')->cascadeOnDelete()->cascadeOnUpdate();        });
+            $table->foreign('id_user')->references('id_user')->on('table_user')->cascadeOnDelete()->cascadeOnUpdate();
+        });
     }
 
     /**

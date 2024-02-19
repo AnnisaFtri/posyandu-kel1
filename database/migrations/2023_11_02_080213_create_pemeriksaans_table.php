@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('pemeriksaans', function (Blueprint $table) {
             $table->char('id_pemeriksaan', 5)->nullable(false)->primary();
-            $table->string('nama_anak',50);
             $table->char('id_anak', 20)->nullable(false);
+            $table->string('nama_anak',50);
             $table->date('tanggal_pemeriksaan')->nullable(false);
             $table->string('usia')->nullable(false);
             $table->string('berat_badan', false)->nullable(false);

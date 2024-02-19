@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\pemeriksaan;
 use App\Models\anak;
+use App\Models\kepala_keluarga;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PemeriksaanController extends Controller
 {
@@ -20,9 +22,11 @@ class PemeriksaanController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function riwayat()
     {
-        //
+        $id_user = Auth::user()->id_user;
+        $riwayat_pemeriksaan = kepala_keluarga::where('id_user', $id_user)->join('anaks', 'anaks.no_kk', '=', 'kepala_keluargas.no_kk')->join('pemeriksaans', 'pemeriksaans.id_anak', '=', 'anaks.id_anak')->first();
+        return view('pemeriksaan.riwayat-pemeriksaan', compact('riwayat_pemeriksaan'));
     }
 
     /**
@@ -78,14 +82,14 @@ class PemeriksaanController extends Controller
     public function update(Request $request, pemeriksaan $pemeriksaan)
     {
         $data = $request->validate([
-            "id_pemeriksaan" => "sometimes",
+            "id_pemeriksaan" => "required",
             "id_anak" => "sometimes", 
             "nama_anak" => "sometimes", 
             "tanggal_pemeriksaan" => "sometimes", 
             "usia" => "sometimes", 
             "berat_badan" => "sometimes", 
             "tinggi_badan" => "sometimes", 
-            "lingkar_kepala" => "sometime", 
+            "lingkar_kepala" => "sometimes", 
             "status_gizi" => "sometimes",
             "saran" => "sometimes"
         ]);
@@ -96,9 +100,10 @@ class PemeriksaanController extends Controller
             return redirect()->back()->with('flash_message_success','Update Berhasil');
         }
     }
+    
 
     /**
-     * Remove the specified resource from storage.
+     * Remove t$2y$10$K6nFs2VBInOwT6cZXLYWeuf2OrBSUkQ5Q/Fj8LWv7SvC1gP9sMdIehe specified resource from storage.
      */
     public function hapus(Request $request, pemeriksaan $pemeriksaan)
     {
@@ -106,11 +111,19 @@ class PemeriksaanController extends Controller
         $data = $pemeriksaan->where('id_pemeriksaan', $idPemeriksaan)->delete();
         return response()->json($data);
     }
-    public function cetak()
+
+    public function detail(Request $request, pemeriksaan $pemeriksaan)
     {
-     $pemeriksaan = Pemeriksaan::all();
- 
-     $pdf = PDF::loadview('pemeriksaan.cetak',['pemeriksaan'=>$pemeriksaan]);
-     return $pdf->download('laporan-pemeriksaan-pdf');
+        $idPemeriksaan = $request->input('id_pemeriksaan');
+        $data = $pemeriksaan->where('id_pemeriksaan', $idPemeriksaan)->first();
+        return response()->json($data);
+    } 
+
+    public function cetak(Request $request,pemeriksaan $pemeriksaan)
+    {
+        $data_pemeriksaan = $pemeriksaan->where('id_pemeriksaan', $request->id)->first();
+        $pdf = PDF::loadView('pemeriksaan-pdf', ['pemeriksaan' => $data_pemeriksaan]);
+        return $pdf->download('pemeriksaan.pdf');
     }
+    
 }

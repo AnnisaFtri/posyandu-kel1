@@ -51,17 +51,6 @@ class AnakController extends Controller
         // dd($request->all());
 
         if ($data) {
-            if ($request->input('id') !== null) {
-                // TODO: Update data anak 
-                $anak = anak::query()->find($request->input('id'));
-                $anak->fill($data);
-                $anak->save();  
-
-                return response()->json([
-                    'message' => 'data anak berhasil diupdate!'
-                ], 200);
-            }
-
             $dataInsert = anak::create($data);
             if ($dataInsert) {
                 return redirect()->to('/dataanak')->with('success', 'Data anak berhasil ditambah');
@@ -115,6 +104,8 @@ class AnakController extends Controller
         $data = $anak->where('id_anak', $idAnak)->first();
         return response()->json($data);
     } 
+
+
     public function cetak()
     {
      $anak = Anak::all();

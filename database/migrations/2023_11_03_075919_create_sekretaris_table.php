@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('sekretaris', function (Blueprint $table) {
             $table->integer('NIK', false)->nullable(false)->primary();
-            $table->string('username', 50)->nullable(false);
+            $table->unsignedBigInteger('id_user');
             $table->string('nama_sekretaris', 50)->nullable(false);
             $table->date('tanggal_lahir_sekretaris');
             $table->enum('jenis_kelamin',['laki-laki', 'perempuan']);
@@ -21,7 +21,10 @@ return new class extends Migration
             $table->integer('no_telpon_sekretaris', false);
             $table->timestamps();
 
-            $table->foreign('username')->on('table_users')->references('username')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreign('id_user')->on('table_user')->references('id_user')->cascadeOnDelete()->cascadeOnUpdate();
+            
+            // $table->string('username', 50)->nullable(false);
+            // $table->foreign('username')->on('table_users')->references('username')->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 

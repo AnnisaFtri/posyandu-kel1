@@ -1,4 +1,4 @@
-
+<!-- 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,4 +23,4 @@
         <!-- Tambahkan informasi detail lainnya yang diperlukan -->
     </div>
 </body>
-</html>
+</html> -->

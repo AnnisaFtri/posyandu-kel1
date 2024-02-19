@@ -14,7 +14,7 @@ class AkunSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('table_users')->insert([
+        DB::table('table_user')->insert([
             'username' => 'john_doe',
             'password' => Hash::make('123'),
             'foto' => 'your_foto',

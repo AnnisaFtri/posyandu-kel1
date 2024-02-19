@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('kepala_keluargas', function (Blueprint $table) {
             $table->integer('no_kk', false)->nullable(false)->primary();
-            $table->string('username', 50)->nullable(false);
+            $table->integer('id_user');
             $table->string('nama_ayah',50);
             $table->string('alamat_ayah', 50);
 
-            $table->foreign('username')->on('table_users')->references('username')->cascadeOnDelete()->cascadeOnUpdate();
+            // $table->foreign('username')->on('table_users')->references('username')->cascadeOnDelete()->cascadeOnUpdate();
+            // $table->string('username', 50)->nullable(false);
         });
     }
 

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserLoginRequest;
 use App\Models\kepala_keluarga;
-use App\Models\auth as User;
+use App\Models\Auth as User;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -30,20 +30,19 @@ class AuthController extends Controller
 
     public function registercheck(Request $request, kepala_keluarga $kepala_keluarga, User $user)
     {
-        // dd($request->all());
-        
-        $data_kepala_keluarga = $request->validate([
-            'no_kk' => 'required',
-            'nama_ayah' => 'required',
-            'alamat_ayah' => 'required',
-            'username' => 'required'
-        ]);
-        
+       
         $data_akun = $request->validate([
             'username' => 'required',
             'password' => 'required',
             'foto' => 'file|required'
         ]);
+        
+        $data_kepala_keluarga = $request->validate([
+            'no_kk' => 'required',
+            'nama_ayah' => 'required',
+            'alamat_ayah' => 'required'
+        ]);
+        
         
 if ($request->hasFile('foto') && $request->file('foto')->isValid()) {
     $foto_file = $request->file('foto');
@@ -52,7 +51,10 @@ if ($request->hasFile('foto') && $request->file('foto')->isValid()) {
     $data_akun['foto'] = $foto_nama;
 }
         $data_akun['password'] = Hash::make($data_akun['password']);
-        $user->create($data_akun);
+        $data_akun['role'] = "warga";
+        
+        $id_user = $user->create($data_akun)->id_user;
+        $data_kepala_keluarga['id_user'] = $id_user;
         $kepala_keluarga->create($data_kepala_keluarga);
 
         return redirect()->to('/login');
@@ -60,7 +62,7 @@ if ($request->hasFile('foto') && $request->file('foto')->isValid()) {
 
     public function logincheck(Request $request)
     {
-        // dd($request->all());
+        
         $akun = $request->validate(
             [
                 'username' => ['required'],
@@ -68,10 +70,12 @@ if ($request->hasFile('foto') && $request->file('foto')->isValid()) {
             ]
         );
         if (Auth::attempt($akun)) {
-            // dd(Auth::user());
+        
             // $request->session()->regenerate();
-             if (Auth::user()->role == 'admin'):
+             if (Auth::user()->role == 'admin' || Auth::user()->role == 'operator'):
                 return redirect()->to('/dashboard')->with('success','Anda berhasil Login!');
+            elseif(Auth::user()->role == 'warga'):
+                return redirect()->to('/newsbabies')->with('success','Anda berhasil Login!');
              else:
                  return redirect()->to('/')->with('success','Anda berhasil Login!');;
              endif;

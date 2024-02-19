@@ -27,6 +27,15 @@
           <button>5</button>
         </div>
       </div>
+      <div class="form-group">
+             <label for="tanggal">Tanggal:</label>
+              <input type="date" id="tanggal" name="tanggal" class="form-control">
+              <label for="jam">Jam:</label>
+              <input type="time" id="jam" name="jam" class="form-control">
+          </div>
+      
+          <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
       
       <!-- <section class="main-course">
         <h1>My courses</h1>

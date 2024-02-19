@@ -11,7 +11,7 @@ class pemeriksaan extends Model
     use HasFactory;
     protected $table = 'pemeriksaans';
     protected $primaryKey = 'id_pemeriksaan';
-    protected $fillable = ['id_pemeriksaan','id_anak', 'nama_anak', 'tanggal_pemeriksaan', 'usia', 
+    protected $fillable = ['id_pemeriksaan', 'id_anak', 'nama_anak', 'tanggal_pemeriksaan', 'usia', 
                     'berat_badan', 'tinggi_badan', 'lingkar_kepala', 'status_gizi','saran'];
 
     public $timestamps = false;

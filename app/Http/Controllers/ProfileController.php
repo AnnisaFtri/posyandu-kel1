@@ -2,11 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\kepala_keluarga;
 use Illuminate\Http\Request;
 use App\Models\Profile;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
+    public function index()
+    {
+        $id_user = Auth::user()->id_user;
+        $data = kepala_keluarga::where('table_user.id_user', $id_user)->join('table_user','kepala_keluargas.id_user', '=' ,'table_user.id_user')->first();
+        return view('profile.index',compact('data'));
+    }
     public function create()
     {
         return view('profile.create');

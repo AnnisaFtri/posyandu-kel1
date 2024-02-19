@@ -1,60 +1,50 @@
-<!-- resources/views/users/edit.blade.php -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit User</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <div class="container mt-5">
-        <h1>Edit User</h1>
-        <form action="{{ route('users.update', $user->email_user) }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            {{-- @method('PUT') --}}
-            <div class="mb-3">
-                <label for="email_user" class="form-label">Email:</label>
-                <div class="input-group mb-3">
-                <input type="text" class="form-control" id="email_user" name="email_user" value="{{ $user->email_user }}" required>
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">@gmail.com</span>
+@extends('layout.app')
+
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Edit User</div>
+
+                <div class="card-body">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                    <form action="{{ route('users.update', $user->id_user) }}" method="POST">
+    @csrf
+    @method('PUT')
+                        <div class="form-group">
+                            <label for="username">Username:</label>
+                            <input type="text" name="username" id="username" class="form-control" value="{{ $user->username }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password:</label>
+                            <input type="password" name="password" id="password" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="foto">Photo:</label>
+                            <input type="text" name="foto" id="foto" class="form-control" value="{{ $user->foto }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="role">Role:</label>
+                            <select name="role" id="role" class="form-control" required>
+                                <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>Admin</option>
+                                <option value="operator" {{ $user->role == 'operator' ? 'selected' : '' }}>Operator</option>
+                                <option value="warga" {{ $user->role == 'warga' ? 'selected' : '' }}>Warga</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </form>
                 </div>
             </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Password:</label>
-                <input type="password" class="form-control" id="password" name="password" value="{{ $user->password }}" required>
-            </div>
-
-            <div class="mb-3">
-                <label for="foto_profil" class="form-label">Profile Picture:</label>
-                <br>
-                <img src="{{ url('foto_profil') . '/' . $user->foto_profil }}" style="width: 200px; height: 250px;" alt="Profile" />
-                <input type="file" name="foto_profil" id="foto_profil" class="form-control mt-3">
-            </div>
-            <div class="mb-3">
-                <label for="role" class="form-label">Role:</label>
-                <select class="form-select" id="role" name="role">
-                    <option value="ketua_dkm" @if($user->role == 'ketua_dkm') selected @endif>Ketua DKM</option>
-                    <option value="bendahara" @if($user->role == 'bendahara') selected @endif>Bendahara</option>
-                    <option value="warga_sekolah" @if($user->role == 'warga_sekolah') selected @endif>Warga Sekolah</option>
-                </select>
-            </div>
-
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-
-            <button type="submit" class="btn btn-primary">Update User</button>
-        </form>
+        </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+</div>
+@endsection

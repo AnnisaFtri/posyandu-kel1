@@ -2,7 +2,7 @@
 @section('title', 'dataanak')
 @section('content')
 
-    <div class="container-xl" style="margin-left: 100px; width: 100%; padding:0 0px;">
+    <div class="container-xl" style="margin-left: 100px; width: 100%; padding:0 50px;">
         <div class="table-responsive">
             <div class="table-title">
                 <div class="row">
@@ -11,9 +11,11 @@
                    <div class="row">
                    <div class="row">
     <div class="col-sm-6 d-flex justify-content-center"> <!-- Menggunakan grid system Bootstrap untuk membagi kolom -->
+    @if (Auth::user()->role == 'admin')
         <a href="#addEmployeeModal" class="btn btn-success" style="width: 150px;" data-toggle="modal">
             <i class="material-icons">&#xE147;</i> <span>Tambah</span>
         </a> 
+    @endif
     </div>
     <div class="col-sm-6 d-flex justify-content-center justify-content-sm-end"> <!-- Menggunakan grid system Bootstrap untuk membagi kolom -->
         <a href="dataanak/cetak" class="btn btn-success">
@@ -29,7 +31,9 @@
                         <th>ID Anak</th>
                         <th>Nama</th>
                         <th>Alamat</th>
+                        @if (Auth::user()->role == 'admin')
                         <th>Aksi</th>
+                        @endif
                     </tr>
                 </thead>
                 <tbody>
@@ -39,6 +43,7 @@
                             <td>{{ $a->id_anak }}</td>
                             <td>{{ $a->nama_anak }}</td>
                             <td>{{ $a->alamat }}</td>
+                            @if (Auth::user()->role == 'admin')
                             <td style="width: 150px; padding: 0px;display : flex">
                                 <a href="#editEmployeeModal" class="edit btn_edit" data-toggle="modal"
                                     idAnak="{{ $a->id_anak }}"><i class="material-icons" data-toggle="tooltip"
@@ -50,6 +55,7 @@
                                     idAnak="{{ $a->id_anak }}"><i class="bi bi-book" data-toggle="tooltip"
                                         title="Detail"></i></a>
                             </td>
+                            @endif
                         </tr>
                     @endforeach
                 </tbody>
@@ -163,13 +169,13 @@
                         </div>
                     </div>
                     <div class="modal-footer">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                        <input type="submit" class="btn btn-info" value="Save">
                         @if (session('flash_message_success'))
                             <div class="alert alert-success">
                                 {{ session('flash_message_success') }}
                             </div>
                         @endif
-                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                        <input type="submit" class="btn btn-info" value="Save">
                     </div>
                 </form>
             </div>
@@ -231,11 +237,6 @@
                     </div>
 
                     <div class="modal-footer">
-                        @if (session('flash_message_success'))
-                            <div class="alert alert-success">
-                                {{ session('flash_message_success') }}
-                            </div>
-                        @endif
                        
                     </div>
                 </form>

@@ -15,7 +15,7 @@ class KepalaKeluargaSeeder extends Seeder
     {
         DB::table('kepala_keluargas')->insert([
             'no_kk' => 1,
-            'username' => 'john_doe',
+            'id_user' => 1,
             'nama_ayah' => 'John Doe Sr.',
             'alamat_ayah' => '123 Main St, Anytown',
         ]);

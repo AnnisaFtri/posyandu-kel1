@@ -11,7 +11,7 @@ class kepala_keluarga extends Model
     use HasFactory;
     protected $table = 'kepala_keluargas';
     protected $primarykey = 'no_kk';
-    protected $fillable = ['username', 'no_kk', 'nama_ayah', 'alamat_ayah'];
+    protected $fillable = ['username', 'no_kk', 'nama_ayah', 'alamat_ayah', 'id_user'];
 
     public $timestamps = false;
 

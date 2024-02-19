@@ -14,8 +14,7 @@ class CreateProfilesTable extends Migration
             $table->string('no_kk')->unique();
             $table->string('nama_orangtua')->nullable();
             $table->string('alamat')->nullable();
-            $table->string('nama_orangtua')->nullable();
-            $table->file('foto')->nullable();
+            $table->string('foto')->nullable();
             $table->timestamps();
         });
     }

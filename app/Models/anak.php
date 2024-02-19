@@ -10,10 +10,10 @@ class anak extends Model
 {
     use HasFactory;
     protected $table = 'anaks';
-    protected $primarykey = 'id_anak';
+    protected $primaryKey = 'id_anak';
     protected $fillable = ['no_kk', 'id_anak', 'nama_anak', 'tanggal_lahir', 'nama_orangtua','jenis_kelamin', 'anak_ke', 'alamat'];
     
-    protected $timestamp = false;
+    public $timestamps = false;
 
     function kepala_keluarga(): BelongsTo
     {

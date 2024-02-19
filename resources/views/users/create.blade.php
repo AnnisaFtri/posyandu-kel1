@@ -1,45 +1,50 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Create User</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <div class="container mt-5">
-        <h1>Create User</h1>
-        <form action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            <div class="mb-3">
-                <label for="email_user" class="form-label">Email:</label>
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" id="email_user" name="email_user" required>
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">@gmail.com</span>
+@extends('layout.app')
+
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Create User</div>
+
+                <div class="card-body">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    <form action="{{ route('users.store') }}" method="POST">
+                        @csrf
+                        <div class="form-group">
+                            <label for="username">Username:</label>
+                            <input type="text" name="username" id="username" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password:</label>
+                            <input type="password" name="password" id="password" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="foto">Photo:</label>
+                            <input type="text" name="foto" id="foto" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="role">Role:</label>
+                            <select name="role" id="role" class="form-control" required>
+                                <option value="admin">Admin</option>
+                                <option value="operator">Operator</option>
+                                <option value="warga">Warga</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
                 </div>
             </div>
-
-            <div class="mb-3">
-                <label for="password" class="form-label">Password:</label>
-                <input type="password" class="form-control" id="password" name="password" required>
-            </div>
-
-            <label>Foto</label>
-            <input type="file" class="form-control mb-3" id="Foto" name="foto_profil" required>
-            <div class="mb-3">
-                <label for="role" class="form-label">Role:</label>
-                <select class="form-select" id="role" name="role" required>
-                    <option value="ketua_dkm">Ketua DKM</option>
-                    <option value="bendahara">Bendahara</option>
-                    <option value="warga_sekolah">Warga Sekolah</option>
-                </select>
-            </div>
-
-            <button type="submit" class="btn btn-primary">Create User</button>
-        </form>
+        </div>
     </div>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+</div>
+@endsection

@@ -20,7 +20,7 @@
 
     <!-- Custom CSS -->
     <link href="{{asset('public/css/style.css')}}" rel="stylesheet" type="text/css">
-    <link rel="icon" href="{{asset('logo.png')}}">
+    <link rel="icon" href="{{asset('logo2.png')}}">
 
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
@@ -52,6 +52,8 @@
 }
 
 body{
+  height: 100vh;
+  background-size: cover;
   background: linear-gradient(#1ADAF1, #A7EEF6);
 }
 
@@ -78,8 +80,8 @@ nav{
   margin: 10px 0 0 10px;
 }
 .logo img{
-  width: 55px;
-  height: 75px;
+  width: 50%;
+  height: 75%;
   border-radius: 50%;
 }
 .logo span{
@@ -251,6 +253,7 @@ li{
 .table-responsive {
     margin: 30px 0;
 }
+
 .table-title h2 {
 	margin: 5px 0 0;
 	font-size: 24px;
@@ -481,12 +484,11 @@ table.table .avatar {
     <nav style="position:fixed;">
       <ul>
         <li><a href="#" class="logo">
-          <img src="/logo_terpadu.png" alt="">
-          <span class="nav-item">DashBoard</span>
+          <img src="/logo2.png" alt="">
         </a></li>
         <li><a href="http://127.0.0.1:8000/dashboard">
           <i class="fas fa-home"></i>
-          <span class="nav-item">Home</span>
+          <span class="nav-item">Dashboard</span>
         </a></li>
         <li><a href="http://127.0.0.1:8000/dataanak#">
           <i class="fas fa-user"></i>
@@ -500,7 +502,7 @@ table.table .avatar {
           <i class="fas fa-chart-bar"></i>
           <span class="nav-item">Pelayanan</span>
         </a></li>
-        <li><a href="">
+        <li><a href="http://127.0.0.1:8000/users">
           <i class="fas fa-user"></i>
           <span class="nav-item">User</span>
         </a></li>
